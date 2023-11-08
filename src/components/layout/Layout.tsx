@@ -1,5 +1,5 @@
-import { Footer as CustomFooter } from "./Footer/Footer";
-import { Header as CustomHeader } from "./Header/Header";
+import { Footer as CustomFooter } from "./footer/footer";
+import { Header as CustomHeader } from "./header/header";
 import { Outlet } from "react-router-dom";
 import { Layout as AntdLayout } from "antd";
 
@@ -11,6 +11,7 @@ const Layout = () => {
     backgroundColor: "white",
     lineHeight: "normal",
     display: "flex",
+    justifyContent: "space-between",
     alignItems: "center",
   };
 
