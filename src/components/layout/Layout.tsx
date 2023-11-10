@@ -1,7 +1,8 @@
-import { Footer as CustomFooter } from "./footer/footer";
-import { Header as CustomHeader } from "./header/header";
 import { Outlet } from "react-router-dom";
 import { Layout as AntdLayout } from "antd";
+
+import { Footer as CustomFooter } from "./footer/footer";
+import { Header as CustomHeader } from "./header/header";
 
 const { Header, Footer, Content } = AntdLayout;
 

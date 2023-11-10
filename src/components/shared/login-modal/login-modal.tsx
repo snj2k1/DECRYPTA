@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { Modal, Input } from "antd";
 import { useDispatch, useSelector } from "react-redux";
+
 import {
   selectModalOpen,
   selectModalType,
   toggleState,
 } from "../../../store/slices/modal-slice";
-import { Auth } from "../../../utils/local-storage";
-import { CheckEmail } from "../../../services/check-email";
+import { RegisterUser } from "../../../utils/register-user";
 import { logIn } from "../../../store/slices/auth-slice";
+import { LoginUser } from "../../../utils/login-user";
 
 const LoginModal = () => {
   const open = useSelector(selectModalOpen);
@@ -23,41 +24,23 @@ const LoginModal = () => {
     setConfirmLoading(true);
     setTimeout(() => {
       if (type === "registration") {
-        if (CheckEmail(email)) {
-          if (Auth.getUser(email) === null) {
-            Auth.addUser(email, {
-              email,
-              password,
-              favorite: [],
-              history: [],
-            });
-            Auth.setAuth(email);
-            dispatch(logIn(email));
-            setEmail("");
-            setPassword("");
-            setError("");
-            dispatch(toggleState({ open: false, type }));
-          } else {
-            setError("This E-Mail has already been registered");
-          }
-        } else {
-          setError("Incorrect E-Mail was entered");
-        }
+        const err = RegisterUser(email, password);
+        handleError(err);
       } else {
-        const user = Auth.getUser(email);
-        if (user && user.password === password) {
-          Auth.setAuth(email);
-          dispatch(logIn(email));
-          setEmail("");
-          setPassword("");
-          setError("");
-          dispatch(toggleState({ open: false, type }));
-        } else {
-          setError("E-Mail or Password entered incorrectly");
-        }
+        const err = LoginUser(email, password);
+        handleError(err);
       }
       setConfirmLoading(false);
     }, 2000);
+  };
+
+  const handleError = (err: string | null): void => {
+    if (err) {
+      setError(err);
+    } else {
+      dispatch(logIn(email));
+      handleCancel();
+    }
   };
 
   const handleCancel = () => {

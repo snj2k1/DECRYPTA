@@ -1,5 +1,6 @@
 {
   "extends": ["react-app", "react-app/jest"],
+  "plugins": ["filenames"],
   "rules": {
     "no-console": "warn",
     "@typescript-eslint/no-explicit-any": "error",
@@ -11,6 +12,16 @@
     "curly": ["error", "all"],
     "import/prefer-default-export": "off",
     "react/jsx-no-useless-fragment": ["error", { "allowExpressions": true }],
-    "no-unused-expressions": "error"
+    "no-unused-expressions": "error",
+    "filenames/match-exported": ["error", "kebab"],
+    "filenames/match-regex": ["error", "^[a-z-]+$", true],
+    "filenames/no-index": "off",
+    "import/order": [
+      "error",
+      {
+        "groups": [["builtin", "external"], "internal", ["parent", "sibling", "index"]],
+        "newlines-between": "always-and-inside-groups"
+      }
+    ]
   }
 }

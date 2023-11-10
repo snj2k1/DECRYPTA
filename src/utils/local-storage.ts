@@ -8,8 +8,8 @@ export const Auth = {
     }
     return null;
   },
-  addUser: (key: string, value: User): void => {
-    const item = JSON.stringify(value);
+  addUser: (key: string, value: { email: string; password: string }): void => {
+    const item = JSON.stringify({ ...value, favorite: [], history: [] });
     localStorage.setItem(key, item);
   },
   setAuth: (name: string): void => localStorage.setItem("auth", name),
