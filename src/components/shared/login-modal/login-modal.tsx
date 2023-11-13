@@ -7,9 +7,9 @@ import {
   selectModalType,
   toggleState,
 } from "../../../store/slices/modal-slice";
-import { RegisterUser } from "../../../utils/register-user";
+import { registerUser } from "../../../utils/register-user";
 import { logIn } from "../../../store/slices/auth-slice";
-import { LoginUser } from "../../../utils/login-user";
+import { loginUser } from "../../../utils/login-user";
 
 const LoginModal = () => {
   const open = useSelector(selectModalOpen);
@@ -24,10 +24,10 @@ const LoginModal = () => {
     setConfirmLoading(true);
     setTimeout(() => {
       if (type === "registration") {
-        const err = RegisterUser(email, password);
+        const err = registerUser(email, password);
         handleError(err);
       } else {
-        const err = LoginUser(email, password);
+        const err = loginUser(email, password);
         handleError(err);
       }
       setConfirmLoading(false);
