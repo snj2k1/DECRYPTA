@@ -1,10 +1,12 @@
-import styles from "./Header.module.scss";
+import { HeaderButtons } from "../../screens/header-buttons/header-buttons";
+import { Logo } from "../../ui/logo/logo";
 
 const Header = () => {
   return (
-    <span className={styles.logo}>
-      <span>DE</span>CRYPTA
-    </span>
+    <>
+      <Logo />
+      <HeaderButtons />
+    </>
   );
 };
 
