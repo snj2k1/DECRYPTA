@@ -44,20 +44,6 @@ const CryptoList = () => {
   ) : (
     <ul className={s.list}>
       <TableHeader />
-      {isLoading && (
-        <Spin
-          indicator={
-            <LoadingOutlined
-              style={{
-                fontSize: 64,
-                position: "static",
-                margin: "30px 50%",
-              }}
-              spin
-            />
-          }
-        />
-      )}
       {data &&
         data.map((el: Crypto) => (
           <CryptoItem
@@ -72,6 +58,20 @@ const CryptoList = () => {
             currencySymbol={symbol}
           />
         ))}
+      {isLoading && (
+        <Spin
+          indicator={
+            <LoadingOutlined
+              style={{
+                fontSize: 64,
+                position: "static",
+                margin: "30px 50%",
+              }}
+              spin
+            />
+          }
+        />
+      )}
     </ul>
   );
 };

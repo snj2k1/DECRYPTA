@@ -13,7 +13,6 @@ const constructParams = (page: number, currency: "usd" | "rub") => ({
 
 /* eslint-disable */ // Внутри метода merge эти данные обозначены как any
 const updateCache = (currentCache: any, newItems: any) => {
-  console.log(currentCache, newItems);
   const updatedResults = [
     ...(currentCache?.results || []),
     ...(newItems.results || newItems),
