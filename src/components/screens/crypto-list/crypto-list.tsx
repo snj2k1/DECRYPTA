@@ -10,12 +10,12 @@ import { Crypto } from "../../../types/crypto-types";
 import { CryptoItem } from "../crypto-item/crypto-item";
 import s from "./crypto-list.module.scss";
 import { TableHeader } from "../../ui/table-header/table-header";
-import { CurrencyState } from "../../../context/currency-context/currency-context";
+import { useCurrency } from "../../../context/currency-context/currency-context";
 
 const CryptoList = () => {
   const [usdPage, setUsdPage] = useState<number>(1);
   const [rubPage, setRubPage] = useState<number>(1);
-  const { currency, symbol } = CurrencyState();
+  const { currency, symbol } = useCurrency();
   const query =
     currency === "usd" ? useGetCoinListUSDQuery : useGetCoinListRUBQuery;
 
@@ -39,10 +39,12 @@ const CryptoList = () => {
     };
   }, [currency, usdPage, rubPage, isLoading]);
 
-  return (
+  return error ? (
+    <span>Something went wrong!</span>
+  ) : (
     <ul className={s.list}>
       <TableHeader />
-      {isLoading ? (
+      {isLoading && (
         <Spin
           indicator={
             <LoadingOutlined
@@ -55,9 +57,8 @@ const CryptoList = () => {
             />
           }
         />
-      ) : error ? (
-        <span>Something went wrong!</span>
-      ) : (
+      )}
+      {data &&
         data.map((el: Crypto) => (
           <CryptoItem
             key={el["id"]}
@@ -70,8 +71,7 @@ const CryptoList = () => {
             marketCap={el["market_cap"]}
             currencySymbol={symbol}
           />
-        ))
-      )}
+        ))}
     </ul>
   );
 };

@@ -26,14 +26,3 @@ export type Crypto = {
   roi: null | object;
   last_updated: string;
 };
-
-export type CryptoItemProps = {
-  id: string;
-  symbol: string;
-  name: string;
-  image: string;
-  price: number;
-  dayChange: number;
-  marketCap: number;
-  currencySymbol: "$" | "₽";
-};

@@ -8,9 +8,9 @@ import React, {
 } from "react";
 
 interface CurrencyContextProps {
-  currency: "usd" | "rub";
-  setCurrency: React.Dispatch<React.SetStateAction<"usd" | "rub">>;
-  symbol: "$" | "₽";
+  currency: string;
+  setCurrency: React.Dispatch<React.SetStateAction<string>>;
+  symbol: string;
 }
 
 const Currency = createContext<CurrencyContextProps | undefined>(undefined);
@@ -20,13 +20,13 @@ interface CurrencyContextProviderProps {
 }
 
 const CurrencyContext: FC<CurrencyContextProviderProps> = ({ children }) => {
-  const [currency, setCurrency] = useState<"usd" | "rub">("usd");
-  const [symbol, setSymbol] = useState<"$" | "₽">("$");
+  const [currency, setCurrency] = useState("usd");
+  const [symbol, setSymbol] = useState("$");
 
   useEffect(() => {
     if (currency === "usd") {
       setSymbol("$");
-    } else if (currency === "rub") {
+    } else {
       setSymbol("₽");
     }
   }, [currency]);
@@ -40,7 +40,7 @@ const CurrencyContext: FC<CurrencyContextProviderProps> = ({ children }) => {
 
 export default CurrencyContext;
 
-export const CurrencyState = (): CurrencyContextProps => {
+export const useCurrency = (): CurrencyContextProps => {
   const context = useContext(Currency);
   if (!context) {
     throw new Error(

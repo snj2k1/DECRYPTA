@@ -1,14 +1,14 @@
 import { Select } from "antd";
 
-import { CurrencyState } from "../../../context/currency-context/currency-context";
+import { useCurrency } from "../../../context/currency-context/currency-context";
 
 const SelectCurrency = () => {
-  const { currency, setCurrency } = CurrencyState();
+  const { currency, setCurrency } = useCurrency();
 
   return (
     <Select
       defaultValue={currency}
-      onChange={value => setCurrency(value)}
+      onChange={setCurrency}
       options={[
         { value: "usd", label: "$ USD" },
         { value: "rub", label: "₽ RUB" },
