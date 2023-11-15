@@ -14,11 +14,13 @@ const Layout = () => {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
+    padding: "25px 50px",
   };
 
   const contentStyle = {
     fontFamily: "Inter, sans-serif",
     lineHeight: "normal",
+    padding: "25px 50px",
   };
 
   const footerStyle = {
@@ -27,6 +29,7 @@ const Layout = () => {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    padding: "25px 50px",
   };
 
   const layoutStyle = {
