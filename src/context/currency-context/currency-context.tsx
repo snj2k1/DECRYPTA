@@ -7,10 +7,12 @@ import React, {
   FC,
 } from "react";
 
+type CurrencyType = "usd" | "rub";
+type SymbolType = "$" | "₽";
 interface CurrencyContextProps {
-  currency: string;
-  setCurrency: React.Dispatch<React.SetStateAction<string>>;
-  symbol: string;
+  currency: CurrencyType;
+  setCurrency: React.Dispatch<React.SetStateAction<CurrencyType>>;
+  symbol: SymbolType;
 }
 
 const Currency = createContext<CurrencyContextProps | undefined>(undefined);
@@ -20,8 +22,8 @@ interface CurrencyContextProviderProps {
 }
 
 const CurrencyContext: FC<CurrencyContextProviderProps> = ({ children }) => {
-  const [currency, setCurrency] = useState("usd");
-  const [symbol, setSymbol] = useState("$");
+  const [currency, setCurrency] = useState<CurrencyType>("usd");
+  const [symbol, setSymbol] = useState<SymbolType>("$");
 
   useEffect(() => {
     if (currency === "usd") {
