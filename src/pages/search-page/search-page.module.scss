@@ -1,0 +1,41 @@
+.container{
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.list{
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 100%;
+
+  >a{
+    display: grid;
+    padding: 0 10px;
+  }
+
+  >div:first-child{
+    background-color: #1677ff;
+    color: white;
+    font-weight: 700;
+    padding: 15px 10px;
+  }
+
+  >a{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(20, 118, 255, .7);
+  }
+}
+
+.search{
+  width: 300px;
+  >span{
+    >input::placeholder{
+      color: rgba(0,0,0,.5);
+    }
+    >input{
+      border: 1px solid #1677ff
+    }
+  }
+}

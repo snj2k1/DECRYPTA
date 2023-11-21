@@ -1,20 +1,20 @@
 import { Link } from "react-router-dom";
-import { SearchOutlined } from "@ant-design/icons";
+import { HistoryOutlined } from "@ant-design/icons";
 import { FloatButton } from "antd";
 
 import { ROUTES } from "../../../routes/constants";
 
-const SearchButton = () => {
+const HistoryButton = () => {
   return (
-    <Link to={ROUTES.SEARCH}>
+    <Link to={ROUTES.HISTORY}>
       <FloatButton
         shape="circle"
         type="primary"
         style={{ position: "static", backgroundColor: "#1677ff" }}
-        icon={<SearchOutlined />}
+        icon={<HistoryOutlined />}
       />
     </Link>
   );
 };
 
-export { SearchButton };
+export { HistoryButton };

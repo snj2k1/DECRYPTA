@@ -1,6 +1,6 @@
-export type User = {
-  email: string,
-  password: string,
-  favorite : [],
-  history: [],
-}
+export type UserTypes = {
+  email: string;
+  password: string;
+  favorite: {};
+  history: [];
+};

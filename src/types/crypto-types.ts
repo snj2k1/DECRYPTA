@@ -26,3 +26,35 @@ export type Crypto = {
   roi: null | object;
   last_updated: string;
 };
+
+export type CryptoHistoryTypes = {
+  id: string;
+  name: string;
+  symbol: string;
+  market_cap_rank: number;
+  image: {
+    large: string;
+    thumb: string;
+    small: string;
+  };
+  description: {
+    en: string;
+  };
+  market_data: {
+    current_price: {
+      usd: number;
+      rub: number;
+    };
+    market_cap: {
+      usd: number;
+      rub: number;
+    };
+  };
+};
+
+export type CryptoFavoritesTypes = {
+  id: string;
+  name: string;
+  symbol: string;
+  image: string;
+};

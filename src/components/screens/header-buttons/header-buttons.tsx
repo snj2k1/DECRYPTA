@@ -6,6 +6,8 @@ import styles from "./header-buttons.module.scss";
 import { selectAuthStatus } from "../../../store/slices/auth-slice";
 import { LogoutButton } from "../../ui/logout-button/logout-button";
 import { SelectCurrency } from "../../ui/select-currency/select-currency";
+import { FavoritesButton } from "../../ui/favorites-button/favorites-button";
+import { HistoryButton } from "../../ui/history-button/history-button";
 
 const HeaderButtons = () => {
   const isAuth = useSelector(selectAuthStatus);
@@ -13,6 +15,8 @@ const HeaderButtons = () => {
   return (
     <div className={styles.buttons}>
       <SearchButton />
+      {isAuth && <FavoritesButton />}
+      {isAuth && <HistoryButton />}
       <SelectCurrency />
       {!isAuth ? <LoginButton /> : <LogoutButton />}
     </div>
