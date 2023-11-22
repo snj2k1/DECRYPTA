@@ -1,10 +1,7 @@
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 import s from "./crypto-item.module.scss";
 import { formatMarketCaps } from "../../../utils/format-market-caps";
-import { selectAuthStatus } from "../../../store/slices/auth-slice";
-import { User } from "../../../utils/local-storage";
 
 type CryptoItemProps = {
   id: string;
