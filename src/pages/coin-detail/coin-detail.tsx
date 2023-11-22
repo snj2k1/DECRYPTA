@@ -17,6 +17,7 @@ import {
   toggleFavorite,
 } from "../../store/slices/auth-slice";
 import { CoinDetailInfo } from "../../components/screens/coin-detail-info/coin-detail-info";
+import { useHistory } from "../../hooks/use-history";
 
 interface ICoinDetail {
   id: string;
@@ -51,6 +52,7 @@ const CoinDetail = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const addHistory = useHistory();
   const isAuth = useSelector(selectAuthUser);
   const favorites = useSelector(selectAuthFavorites);
 
@@ -63,11 +65,7 @@ const CoinDetail = () => {
           setCoin(res.data);
           setLoading(false);
           if (isAuth) {
-            const data: [string, ICoinDetail] = [
-              new Date().toLocaleDateString(),
-              res.data,
-            ];
-            User.setHistory(isAuth, data);
+            addHistory(res.data);
           }
         })
         .catch(e => {

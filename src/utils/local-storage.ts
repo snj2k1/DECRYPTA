@@ -2,11 +2,7 @@ import {
   CryptoFavoritesTypes,
   CryptoHistoryTypes,
 } from "../types/crypto-types";
-import { UserTypes } from "../types/user-types";
-
-interface IFavoritesObject {
-  [key: string]: CryptoFavoritesTypes;
-}
+import { FavoritesTypes, UserTypes } from "../types/user-types";
 
 export const Auth = {
   getUser: (key: string): UserTypes | null => {
@@ -26,15 +22,20 @@ export const Auth = {
 };
 
 export const User = {
-  setHistory: (key: string, data: [string, CryptoHistoryTypes]): void => {
-    const user = Auth.getUser(key);
-    if (user) {
-      const historyArray: Array<[string, CryptoHistoryTypes]> = [
-        ...user.history,
-      ];
-      historyArray.unshift(data);
-      const item = JSON.stringify({ ...user, history: [...historyArray] });
-      localStorage.setItem(key, item);
+  setHistory: (data: [string, CryptoHistoryTypes]): void => {
+    const authKey = Auth.getAuth();
+    if (authKey) {
+      const user = Auth.getUser(authKey);
+      if (user) {
+        const historyArray: Array<[string, CryptoHistoryTypes]> =
+          user.history.filter(el => el[1].id !== data[1].id);
+        historyArray.unshift(data);
+        if (historyArray.length > 20) {
+          historyArray.pop();
+        }
+        const item = JSON.stringify({ ...user, history: [...historyArray] });
+        localStorage.setItem(authKey, item);
+      }
     }
   },
   getHistory: (): Array<[string, CryptoHistoryTypes]> | [] => {
@@ -47,7 +48,7 @@ export const User = {
     }
     return [];
   },
-  getFavorite: (): IFavoritesObject => {
+  getFavorite: (): FavoritesTypes => {
     const authKey = Auth.getAuth();
     if (authKey) {
       const user = Auth.getUser(authKey);
@@ -62,7 +63,7 @@ export const User = {
     if (authKey) {
       const user = Auth.getUser(authKey);
       if (user) {
-        const favorite: IFavoritesObject = { ...user.favorite };
+        const favorite: FavoritesTypes = { ...user.favorite };
         if (favorite[data.id]) {
           delete favorite[data.id];
         } else {
