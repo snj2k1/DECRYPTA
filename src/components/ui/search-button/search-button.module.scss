@@ -1,0 +1,11 @@
+.search{
+  width: 300px;
+  >span{
+    >input::placeholder{
+      color: rgba(0,0,0,.5);
+    }
+    >input{
+      border: 1px solid #1677ff
+    }
+  }
+}
