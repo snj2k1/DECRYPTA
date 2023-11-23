@@ -1,19 +1,45 @@
-import { Link } from "react-router-dom";
-import { SearchOutlined } from "@ant-design/icons";
-import { FloatButton } from "antd";
+import { Input } from "antd";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-import { ROUTES } from "../../../routes/constants";
+import s from "./search-button.module.scss";
+import { useDebounce } from "../../../hooks/use-debounce";
+
+const { Search } = Input;
 
 const SearchButton = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const debouncedSearchTerm = useDebounce(searchTerm, 2000);
+  const navigate = useNavigate();
+
+  const onSearch = (value: string) => {
+    setSearchTerm(value);
+    setIsLoading(true);
+  };
+
+  useEffect(() => {
+    if (searchTerm.trim()) {
+      const searchUrl = `/search?query=${encodeURIComponent(
+        searchTerm.trim(),
+      )}`;
+      navigate(searchUrl);
+      setIsLoading(false);
+      setSearchTerm("");
+    } else {
+      setIsLoading(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debouncedSearchTerm]);
+
   return (
-    <Link to={ROUTES.SEARCH}>
-      <FloatButton
-        shape="circle"
-        type="primary"
-        style={{ position: "static", backgroundColor: "#1677ff" }}
-        icon={<SearchOutlined />}
-      />
-    </Link>
+    <Search
+      className={s.search}
+      placeholder="Search your coin..."
+      onSearch={onSearch}
+      enterButton
+      loading={isLoading}
+    />
   );
 };
 
