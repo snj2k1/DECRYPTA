@@ -1,0 +1,28 @@
+.list{
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 105%;
+  background-color: white;
+  width: 100%;
+  border: 1px solid #1677ff;
+  border-radius: 6px;
+}
+
+.item{
+  padding: 10px 5px;
+  background-color: white;
+  transition: all .4s ease-out;
+  font-weight: 700;
+}
+
+.item:not(:first-child){
+  border-top: 1px solid #1677ff;
+}
+
+.item:hover{
+  background-color: rgba(20, 118, 255, .25);
+  transition: all .4s ease-in;
+}
