@@ -4,29 +4,6 @@
   font-weight: 700;
   gap: 15px;
 }
-.date{
+.date, .url{
   color: rgba(0, 0, 0, .5)
-}
-.img{
-  width: 50px;
-  height: 50px;
-}
-.info{
-  display: flex;
-  align-items: center;
-}
-.names{
-  display: flex;
-  flex-direction: column;
-  margin: 10px;
-  color: #1677ff;
-
-  >span:first-child{
-    font-size: 16px;
-  }
-
-  >span:last-child{
-    font-size: 12px;
-    font-weight: 400;
-  }
 }

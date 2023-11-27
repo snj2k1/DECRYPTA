@@ -1,11 +1,15 @@
 .item{
   display: flex;
+  gap: 30px;
   align-items: center;
   font-weight: 700;
-}
-.item:hover{
-  background-color: rgba($color: #1677ff, $alpha: .25);
-  color: #1677ff;
+
+  >span{
+    >svg{
+      height: 35px;
+      width: 35px;
+    }
+  }
 }
 .img{
   width: 50px;

@@ -8,5 +8,5 @@ export type UserTypes = {
   email: string;
   password: string;
   favorite: FavoritesTypes | {};
-  history: Array<[string, CryptoHistoryTypes]> | [];
+  history: Array<CryptoHistoryTypes> | [];
 };

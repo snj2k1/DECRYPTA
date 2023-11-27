@@ -1,5 +1,5 @@
 import { CheckEmail } from "../services/check-email";
-import { Auth } from "./local-storage";
+import { Auth } from "./user-data-handler";
 
 export const registerUser = (
   email: string,

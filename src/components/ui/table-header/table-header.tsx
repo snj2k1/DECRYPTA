@@ -7,6 +7,7 @@ const TableHeader = () => {
       <span>Price</span>
       <span>24h Change</span>
       <span>Market Cap</span>
+      <span>Favorite</span>
     </div>
   );
 };

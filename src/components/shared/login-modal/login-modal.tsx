@@ -8,8 +8,9 @@ import {
   toggleState,
 } from "../../../store/slices/modal-slice";
 import { registerUser } from "../../../utils/register-user";
-import { logIn } from "../../../store/slices/auth-slice";
+import { logIn, setFavorite } from "../../../store/slices/auth-slice";
 import { loginUser } from "../../../utils/login-user";
+import { User } from "../../../utils/user-data-handler";
 
 const LoginModal = () => {
   const open = useSelector(selectModalOpen);
@@ -39,6 +40,7 @@ const LoginModal = () => {
       setError(err);
     } else {
       dispatch(logIn(email));
+      dispatch(setFavorite(User.getFavorite()));
       handleCancel();
     }
   };

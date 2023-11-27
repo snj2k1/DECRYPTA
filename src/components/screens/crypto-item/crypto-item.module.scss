@@ -2,6 +2,14 @@
   display: flex;
   align-items: center;
   font-weight: 700;
+
+  >span:last-child{
+    justify-content: start;
+    >svg{
+      height: 35px;
+      width: 35px;
+    }
+  }
 }
 .item:hover{
   background-color: rgba($color: #1677ff, $alpha: .25);

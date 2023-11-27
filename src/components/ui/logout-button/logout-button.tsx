@@ -1,7 +1,7 @@
 import { Button } from "antd";
 import { useDispatch } from "react-redux";
 
-import { Auth } from "../../../utils/local-storage";
+import { Auth } from "../../../utils/user-data-handler";
 import { logOut } from "../../../store/slices/auth-slice";
 
 const LogoutButton = () => {

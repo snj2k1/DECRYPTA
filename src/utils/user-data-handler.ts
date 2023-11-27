@@ -22,23 +22,19 @@ export const Auth = {
 };
 
 export const User = {
-  setHistory: (data: [string, CryptoHistoryTypes]): void => {
+  setHistory: (data: CryptoHistoryTypes): void => {
     const authKey = Auth.getAuth();
     if (authKey) {
       const user = Auth.getUser(authKey);
       if (user) {
-        const historyArray: Array<[string, CryptoHistoryTypes]> =
-          user.history.filter(el => el[1].id !== data[1].id);
+        const historyArray: Array<CryptoHistoryTypes> = [...user.history];
         historyArray.unshift(data);
-        if (historyArray.length > 20) {
-          historyArray.pop();
-        }
         const item = JSON.stringify({ ...user, history: [...historyArray] });
         localStorage.setItem(authKey, item);
       }
     }
   },
-  getHistory: (): Array<[string, CryptoHistoryTypes]> | [] => {
+  getHistory: (): Array<CryptoHistoryTypes> | [] => {
     const authKey = Auth.getAuth();
     if (authKey) {
       const user = Auth.getUser(authKey);

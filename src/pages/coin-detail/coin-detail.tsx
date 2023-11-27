@@ -3,21 +3,15 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Spin } from "antd";
 import { LoadingOutlined, ArrowLeftOutlined } from "@ant-design/icons";
-import { HeartOutlined } from "@ant-design/icons";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import { useCurrency } from "../../context/currency-context/currency-context";
 import { COIN_DETAIL } from "../../config/api";
 import s from "./coin-detail.module.scss";
 import { CoinCharts } from "../../components/screens/coin-charts/coin-charts";
-import { User } from "../../utils/local-storage";
-import {
-  selectAuthFavorites,
-  selectAuthUser,
-  toggleFavorite,
-} from "../../store/slices/auth-slice";
+import { selectAuthUser } from "../../store/slices/auth-slice";
 import { CoinDetailInfo } from "../../components/screens/coin-detail-info/coin-detail-info";
-import { useHistory } from "../../hooks/use-history";
+import { AddFavoriteBtn } from "../../components/shared/add-favorite-btn/add-favorite-btn";
 
 interface ICoinDetail {
   id: string;
@@ -51,10 +45,7 @@ const CoinDetail = () => {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const addHistory = useHistory();
   const isAuth = useSelector(selectAuthUser);
-  const favorites = useSelector(selectAuthFavorites);
 
   useEffect(() => {
     setLoading(true);
@@ -64,9 +55,6 @@ const CoinDetail = () => {
         .then(res => {
           setCoin(res.data);
           setLoading(false);
-          if (isAuth) {
-            addHistory(res.data);
-          }
         })
         .catch(e => {
           setError(e);
@@ -78,19 +66,6 @@ const CoinDetail = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
-
-  const handleClick = () => {
-    if (coin) {
-      const data = {
-        id: coin.id,
-        name: coin.name,
-        image: coin.image.large,
-        symbol: coin.symbol,
-      };
-      dispatch(toggleFavorite(data));
-      User.toggleFavorite(data);
-    }
-  };
 
   return (
     <>
@@ -108,10 +83,16 @@ const CoinDetail = () => {
                 <img src={coin.image.large} alt={coin.name} />
                 <h2>{coin.name}</h2>
                 {isAuth && (
-                  <HeartOutlined
-                    className={favorites[coin.id] ? s.heart_active : s.heart}
-                    onClick={handleClick}
-                  />
+                  <div className={s.fav}>
+                    <AddFavoriteBtn
+                      coin={{
+                        image: coin.image.large,
+                        id: coin.id,
+                        name: coin.name,
+                        symbol: coin.symbol,
+                      }}
+                    />
+                  </div>
                 )}
                 <p
                   dangerouslySetInnerHTML={{ __html: coin.description.en }}

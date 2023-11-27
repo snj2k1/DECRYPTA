@@ -1,0 +1,27 @@
+.heart{
+  justify-content: center;
+  >svg{
+    width: 50px;
+    height: 50px;
+    transition: all .4s ease-out;
+    color: #1677ff;
+  }
+  >svg:hover{
+    color: red;
+    transition: all .4s ease-in;
+  }
+}
+
+.heart_active{
+  justify-content: center;
+  >svg{
+    width: 50px;
+    height: 50px;
+    color: red;
+    transition: all .4s ease-out;
+  }
+  >svg:hover{
+    color: #1677ff;
+    transition: all .4s ease-in;
+  }
+}

@@ -28,28 +28,9 @@ export type Crypto = {
 };
 
 export type CryptoHistoryTypes = {
-  id: string;
-  name: string;
-  symbol: string;
-  market_cap_rank: number;
-  image: {
-    large: string;
-    thumb: string;
-    small: string;
-  };
-  description: {
-    en: string;
-  };
-  market_data: {
-    current_price: {
-      usd: number;
-      rub: number;
-    };
-    market_cap: {
-      usd: number;
-      rub: number;
-    };
-  };
+  date: string;
+  url: string;
+  text: string;
 };
 
 export type CryptoFavoritesTypes = {
