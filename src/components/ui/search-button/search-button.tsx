@@ -1,43 +1,42 @@
-import { Input } from "antd";
-import { useEffect, useState } from "react";
+import { Input, InputRef } from "antd";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 import s from "./search-button.module.scss";
 import { useDebounce } from "../../../hooks/use-debounce";
 import { Suggests } from "../suggests/suggests";
+import { useHistory } from "../../../hooks/use-history";
 
 const { Search } = Input;
 
 const SearchButton = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const [suggest, setSuggest] = useState("");
   const [isSearchFocused, setIsSearchFocused] = useState(false);
-
   const debouncedSuggest = useDebounce(suggest, 1000);
-  const debouncedSearchTerm = useDebounce(searchTerm, 2000);
-
   const navigate = useNavigate();
+  const searchInputRef = useRef<InputRef | null>(null);
+  const addHistory = useHistory();
 
   const onSearch = (value: string) => {
-    setSearchTerm(value);
-    setIsLoading(true);
-  };
+    const trimmedValue = value.trim();
+    if (trimmedValue) {
+      setIsSearchFocused(false);
 
-  useEffect(() => {
-    const trimmedSearchTerm = searchTerm.trim();
-    if (trimmedSearchTerm) {
-      const searchUrl = `/search?query=${encodeURIComponent(
-        trimmedSearchTerm,
-      )}`;
+      const searchUrl = `/search?query=${encodeURIComponent(trimmedValue)}`;
+      const historyData = {
+        text: trimmedValue,
+        url: searchUrl,
+      };
+
+      addHistory(historyData);
+
       navigate(searchUrl);
-      setIsLoading(false);
-      setSearchTerm("");
-    } else {
-      setIsLoading(false);
+
+      if (searchInputRef.current) {
+        searchInputRef.current.blur();
+      }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [debouncedSearchTerm]);
+  };
 
   return (
     <div className={s.container}>
@@ -47,9 +46,9 @@ const SearchButton = () => {
         onSearch={onSearch}
         onChange={e => setSuggest(e.target.value.trim())}
         onFocus={() => setIsSearchFocused(true)}
-        onBlur={() => setTimeout(() => setIsSearchFocused(false), 100)}
+        onBlur={() => setTimeout(() => setIsSearchFocused(false), 500)}
+        ref={searchInputRef}
         enterButton
-        loading={isLoading}
       />
       {isSearchFocused && debouncedSuggest && (
         <Suggests suggest={debouncedSuggest} />

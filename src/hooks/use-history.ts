@@ -1,33 +1,21 @@
-import { User } from "../utils/local-storage";
+import { User } from "../utils/user-data-handler";
 
-type DataTypes = {
-  id: string;
-  name: string;
-  market_cap_rank: number;
-  symbol: string;
-  image: {
-    large: string;
-    thumb: string;
-    small: string;
-  };
-  description: {
-    en: string;
-  };
-  market_data: {
-    current_price: {
-      usd: number;
-      rub: number;
-    };
-    market_cap: {
-      usd: number;
-      rub: number;
-    };
-  };
+type PropsTypes = {
+  url: string;
+  text: string;
 };
 
+interface IHistoryData extends PropsTypes {
+  date: string;
+}
+
 export const useHistory = () => {
-  return function (data: DataTypes) {
-    const result: [string, DataTypes] = [new Date().toLocaleString("ru"), data];
+  return function (data: PropsTypes) {
+    const result: IHistoryData = {
+      date: new Date().toLocaleString("ru"),
+      url: data.url,
+      text: data.text,
+    };
     User.setHistory(result);
   };
 };

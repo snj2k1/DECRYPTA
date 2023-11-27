@@ -1,23 +1,19 @@
+import { Link } from "react-router-dom";
+
 import s from "./history-item.module.scss";
 
 type SearchItemProps = {
-  symbol: string;
-  name: string;
-  image: string;
   date: string;
+  url: string;
+  text: string;
 };
 
-const HistoryItem = ({ name, image, symbol, date }: SearchItemProps) => {
+const HistoryItem = ({ date, url, text }: SearchItemProps) => {
   return (
     <div className={s.item}>
       <span className={s.date}>{date}</span>
-      <div className={s.info}>
-        <img src={image} alt={symbol} className={s.img} />
-        <div className={s.names}>
-          <span>{name}</span>
-          <span>{symbol.toUpperCase()}</span>
-        </div>
-      </div>
+      <Link to={url}>{text}</Link>
+      <span className={s.url}>{url}</span>
     </div>
   );
 };

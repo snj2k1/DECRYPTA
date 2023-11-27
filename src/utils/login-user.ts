@@ -1,4 +1,4 @@
-import { Auth } from "./local-storage";
+import { Auth } from "./user-data-handler";
 
 export const loginUser = (email: string, password: string): string | null => {
   const user = Auth.getUser(email);

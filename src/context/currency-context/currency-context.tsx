@@ -1,10 +1,10 @@
 import React, {
   createContext,
   useContext,
-  useEffect,
   useState,
   ReactNode,
   FC,
+  useMemo,
 } from "react";
 
 type CurrencyType = "usd" | "rub";
@@ -23,21 +23,17 @@ interface CurrencyContextProviderProps {
 
 const CurrencyContext: FC<CurrencyContextProviderProps> = ({ children }) => {
   const [currency, setCurrency] = useState<CurrencyType>("usd");
-  const [symbol, setSymbol] = useState<SymbolType>("$");
-
-  useEffect(() => {
-    if (currency === "usd") {
-      setSymbol("$");
-    } else {
-      setSymbol("₽");
-    }
-  }, [currency]);
-
-  return (
-    <Currency.Provider value={{ currency, setCurrency, symbol }}>
-      {children}
-    </Currency.Provider>
+  const symbol: SymbolType = useMemo(
+    () => (currency === "usd" ? "$" : "₽"),
+    [currency],
   );
+
+  const contextValue = useMemo(
+    () => ({ currency, setCurrency, symbol }),
+    [currency, setCurrency, symbol],
+  );
+
+  return <Currency.Provider value={contextValue}>{children}</Currency.Provider>;
 };
 
 export default CurrencyContext;
