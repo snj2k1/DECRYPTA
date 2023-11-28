@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 
 import { COIN_SEARCH } from "../../../config/api";
 import s from "./suggests.module.scss";
@@ -20,7 +21,11 @@ type SuggestsItems = {
   name: string;
 };
 
-const Suggests = ({ suggest }: { suggest: string }): JSX.Element | null => {
+interface SuggestsProps {
+  suggest: string;
+}
+
+const Suggests: React.FC<SuggestsProps> = ({ suggest }): JSX.Element | null => {
   const [suggestsList, setSuggestsList] = useState<Array<SuggestsItems> | []>(
     [],
   );
@@ -46,6 +51,10 @@ const Suggests = ({ suggest }: { suggest: string }): JSX.Element | null => {
       ))}
     </ul>
   ) : null;
+};
+
+Suggests.propTypes = {
+  suggest: PropTypes.string.isRequired,
 };
 
 export { Suggests };
