@@ -31,7 +31,7 @@ const CoinCharts = ({ id, currency }: { id: string; currency: string }) => {
         setLoading(false);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [days]);
+  }, [id, currency, days]);
 
   return error ? (
     <span>Charts loading failed...</span>
