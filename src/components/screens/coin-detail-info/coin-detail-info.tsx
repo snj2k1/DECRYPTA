@@ -13,8 +13,8 @@ const CoinDetailInfo = ({
   market_cap,
   symbol,
 }: CoinDetailInfoProps) => {
-  const currentPrice = symbol + price.toLocaleString("en-US");
-  const marketCap = symbol + formatMarketCaps(market_cap);
+  const currentPrice = symbol + (price ? price.toLocaleString("en-US") : "");
+  const marketCap = symbol + (market_cap ? formatMarketCaps(market_cap) : "");
 
   return (
     <ul>
