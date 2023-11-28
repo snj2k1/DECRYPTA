@@ -22,8 +22,8 @@ https://decrypta.vercel.app/
 -   [x] Есть применение **Контекст API**. [CurrencyContext](https://github.com/snj2k1/DECRYPTA/blob/main/src/context/currency-context/currency-context.tsx)
 -   [x] Есть применение **предохранителя**. [index](https://github.com/snj2k1/DECRYPTA/blob/main/src/index.tsx)
 -   [x] Есть хотя бы один **кастомный хук**. [useHistory](https://github.com/snj2k1/DECRYPTA/blob/main/src/hooks/use-history.ts)
--   [x] Хотя бы несколько компонентов используют **PropTypes**. [CoinDetailInfo](https://github.com/snj2k1/DECRYPTA/blob/main/src/components/screens/coin-detail-info/coin-detail-info.tsx), [HistoryItem](https://github.com/snj2k1/DECRYPTA/blob/main/src/components/screens/history-item/history-item.tsx)
--   [x] Поиск не должен триггерить много запросов к серверу (**debounce**). [SearchPage](https://github.com/snj2k1/DECRYPTA/blob/main/src/pages/search-page/search-page.tsx)
+-   [x] Хотя бы несколько компонентов используют **PropTypes**. [Suggests](https://github.com/snj2k1/DECRYPTA/blob/main/src/components/ui/suggests/suggests.tsx), [SuggestItem](https://github.com/snj2k1/DECRYPTA/blob/main/src/components/ui/suggests/suggest-item.tsx)
+-   [x] Поиск не должен триггерить много запросов к серверу (**debounce**). [SearchButton](https://github.com/snj2k1/DECRYPTA/blob/main/src/components/ui/search-button/search-button.tsx)
 -   [x] Есть применение **lazy + Suspense**. [RootRoutes](https://github.com/snj2k1/DECRYPTA/blob/main/src/routes/root-routes.tsx)
 
 **Redux**
