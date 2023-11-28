@@ -1,4 +1,7 @@
 export const formatMarketCaps = (number: number): string => {
+  if (number < 1) {
+    return String(number);
+  }
   if (number < 1000000) {
     return number.toLocaleString("en-US");
   }
