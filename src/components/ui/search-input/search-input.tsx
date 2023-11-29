@@ -1,5 +1,5 @@
 import { Input, InputRef } from "antd";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import s from "./search-input.module.scss";
@@ -10,16 +10,16 @@ const { Search } = Input;
 
 const SearchInput = () => {
   const { search: searchParams } = useLocation();
-  const query = new URLSearchParams(searchParams).get("query");
-  const [searchTerm, setSearchTerm] = useState(query || "");
+  const query = new URLSearchParams(searchParams).get("query") ?? "";
+  const [searchTerm, setSearchTerm] = useState(query);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const debouncedSuggest = useDebounce(searchTerm.trim(), 1000);
   const navigate = useNavigate();
   const searchInputRef = useRef<InputRef | null>(null);
 
-  if (query && searchTerm !== query) {
-    setSearchTerm(query);
-  }
+  useEffect(() => {
+    query && setSearchTerm(query);
+  }, [query]);
 
   const onSearch = (value: string) => {
     const trimmedValue = value.trim();
@@ -39,8 +39,8 @@ const SearchInput = () => {
   return (
     <div className={s.container}>
       <Search
-        value={searchTerm}
         className={s.search}
+        value={searchTerm}
         placeholder="Search your coin..."
         onSearch={onSearch}
         onChange={e => setSearchTerm(e.target.value)}
