@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 
 import { LoginButton } from "../../ui/login-button/login-button";
-import { SearchButton } from "../../ui/search-button/search-button";
+import { SearchInput } from "../../ui/search-input/search-input";
 import styles from "./header-buttons.module.scss";
 import { selectAuthStatus } from "../../../store/slices/auth-slice";
 import { LogoutButton } from "../../ui/logout-button/logout-button";
@@ -14,7 +14,7 @@ const HeaderButtons = () => {
 
   return (
     <div className={styles.buttons}>
-      <SearchButton />
+      <SearchInput />
       {isAuth && <FavoritesButton />}
       {isAuth && <HistoryButton />}
       <SelectCurrency />

@@ -28,7 +28,11 @@ export const User = {
       const user = Auth.getUser(authKey);
       if (user) {
         const historyArray: Array<CryptoHistoryTypes> = [...user.history];
-        historyArray.unshift(data);
+        if (historyArray.length && historyArray[0].text === data.text) {
+          historyArray[0].date = new Date().toLocaleString("ru");
+        } else {
+          historyArray.unshift(data);
+        }
         const item = JSON.stringify({ ...user, history: [...historyArray] });
         localStorage.setItem(authKey, item);
       }
