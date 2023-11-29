@@ -7,6 +7,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { COIN_SEARCH } from "../../config/api";
 import { SearchItem } from "../../components/screens/search-item/search-item";
 import s from "./search-page.module.scss";
+import { useHistory } from "../../hooks/use-history";
 
 type SearchItems = {
   api_symbol: string;
@@ -24,11 +25,21 @@ const SearchPage = () => {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<Array<SearchItems>>([]);
+  const addHistory = useHistory();
 
   useEffect(() => {
     setError(false);
     setLoading(true);
     if (query) {
+      const searchUrl = `/search${searchParams}`;
+
+      const historyData = {
+        text: query,
+        url: searchUrl,
+      };
+
+      addHistory(historyData);
+
       axios
         .get(COIN_SEARCH(query))
         .then(res => {
