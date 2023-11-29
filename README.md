@@ -23,7 +23,7 @@ https://decrypta.vercel.app/
 -   [x] Есть применение **предохранителя**. [index](https://github.com/snj2k1/DECRYPTA/blob/main/src/index.tsx)
 -   [x] Есть хотя бы один **кастомный хук**. [useHistory](https://github.com/snj2k1/DECRYPTA/blob/main/src/hooks/use-history.ts)
 -   [x] Хотя бы несколько компонентов используют **PropTypes**. [Suggests](https://github.com/snj2k1/DECRYPTA/blob/main/src/components/ui/suggests/suggests.tsx), [SuggestItem](https://github.com/snj2k1/DECRYPTA/blob/main/src/components/ui/suggests/suggest-item.tsx)
--   [x] Поиск не должен триггерить много запросов к серверу (**debounce**). [SearchButton](https://github.com/snj2k1/DECRYPTA/blob/main/src/components/ui/search-button/search-button.tsx)
+-   [x] Поиск не должен триггерить много запросов к серверу (**debounce**). [SearchInput](https://github.com/snj2k1/DECRYPTA/blob/main/src/components/ui/search-input/search-input.tsx)
 -   [x] Есть применение **lazy + Suspense**. [RootRoutes](https://github.com/snj2k1/DECRYPTA/blob/main/src/routes/root-routes.tsx)
 
 **Redux**
